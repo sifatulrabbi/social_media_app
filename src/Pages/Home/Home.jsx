@@ -1,10 +1,11 @@
 import React from "react";
-import { CreatePost } from "../../Components";
+import { CreatePost, FeedCard } from "../../Components";
 
 export default function Home() {
   return (
     <div className="home">
       <CreatePost />
+      <FeedCard />
     </div>
   );
 }
