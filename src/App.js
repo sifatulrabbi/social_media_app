@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Navbar } from "./Components";
+import { Home } from "./Pages";
+import { UserContextProvider } from "./Contexts/UserContext";
+import { ThemeProvider, createTheme } from "@material-ui/core";
+import { blue, yellow } from "@material-ui/core/colors";
+import GlobalStyles from "./globalStyles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: blue[200],
+      main: blue[400],
+      dark: blue[600],
+      contrastText: "#000",
+    },
+    secondary: {
+      light: yellow[400],
+      main: yellow[600],
+      dark: yellow[700],
+      contrastText: "#000",
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContextProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Navbar />
+        <Home />
+      </ThemeProvider>
+    </UserContextProvider>
   );
 }
 
