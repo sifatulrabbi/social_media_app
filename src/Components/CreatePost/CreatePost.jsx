@@ -1,9 +1,12 @@
 import React from "react";
 import { Container, Typography } from "@material-ui/core";
 import SignInBtn from "../SignInBtn/SignInBtn";
-import MakePost from "../MakePost/MakePost";
+import MakePostCard from "../MakePost/MakePostCard";
+import useCreatePost from "../../Hooks/useCreatePost";
 
 export default function CreatePost({ userInfo }) {
+  const props = useCreatePost(userInfo);
+
   function SignIn() {
     return (
       <div>
@@ -18,7 +21,7 @@ export default function CreatePost({ userInfo }) {
 
   return (
     <Container maxWidth={false} align="center" style={{ padding: 0 }}>
-      {true ? <MakePost /> : <SignIn />}
+      {true ? <MakePostCard props={props} /> : <SignIn />}
     </Container>
   );
 }
