@@ -17,7 +17,7 @@ export default function FeedCard() {
   const classes = useStyles();
 
   return (
-    <Container maxWidth="sm" style={{ marginTop: "20px" }}>
+    <Container maxWidth={false} style={{ marginTop: "20px", padding: 0 }}>
       <Paper>
         <ImageList cols={1} rowHeight={220} style={{ padding: "5px" }}>
           <ImageListItem>
@@ -25,19 +25,19 @@ export default function FeedCard() {
           </ImageListItem>
         </ImageList>
         <Container maxWidth="sm" className={classes.btnContainer}>
-          <IconButton color="primary">
+          <IconButton className={classes.iconBtn} color="primary">
             <ThumbUp />
           </IconButton>
-          <IconButton color="primary">
+          <IconButton className={classes.iconBtn} color="primary">
             <ThumbDown />
           </IconButton>
         </Container>
         <Container maxWidth="sm" className={classes.container}>
-          <Typography variant="subtitle2" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom>
             Comments
           </Typography>
           <div>
-            <Typography variant="body2" component="button" className={classes.username}>
+            <Typography variant="body1" component="button" className={classes.username}>
               @username
             </Typography>
             <Typography variant="body2" component="span">

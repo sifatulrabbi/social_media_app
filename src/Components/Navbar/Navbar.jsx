@@ -1,21 +1,8 @@
 import React from "react";
 import SignInBtn from "../SignInBtn/SignInBtn";
 import { UserContext } from "../../Contexts/UserContext";
-import { AppBar, Typography, makeStyles, Container } from "@material-ui/core";
-
-const useStyles = makeStyles({
-  navbar: {
-    height: "65px",
-    color: "white",
-  },
-
-  container: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    height: "100%",
-  },
-});
+import { AppBar, Typography, Container, Avatar } from "@material-ui/core";
+import { useStyles } from "./NavbarStyles";
 
 export default function Navbar() {
   const classes = useStyles();
@@ -23,11 +10,11 @@ export default function Navbar() {
 
   return (
     <AppBar align="start" position="fixed" className={classes.navbar}>
-      <Container className={classes.container}>
+      <Container maxWidth={false} className={classes.container}>
         <Typography variant="h5" color="inherit">
           Socialize
         </Typography>
-        {userInfo ? <img className="user-dp" src={userInfo.photoURL} alt="user" /> : <SignInBtn />}
+        {userInfo ? <Avatar src={userInfo.photoURL} alt="user" /> : <SignInBtn />}
       </Container>
     </AppBar>
   );

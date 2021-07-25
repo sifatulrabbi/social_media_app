@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles({
   container: {
     paddingBottom: "20px",
-    marginTop: "20px",
+    marginTop: "15px",
   },
 
   btnContainer: {
@@ -19,7 +19,7 @@ export const useStyles = makeStyles({
     alignItems: "center",
     width: "100%",
     padding: 0,
-    marginTop: "25px",
+    marginTop: "15px",
   },
 
   username: {
@@ -30,5 +30,10 @@ export const useStyles = makeStyles({
     fontWeight: "500",
     padding: 0,
     paddingRight: "5px",
+  },
+
+  iconBtn: {
+    height: "30px",
+    width: "30px",
   },
 });
