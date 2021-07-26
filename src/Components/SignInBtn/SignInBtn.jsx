@@ -4,7 +4,7 @@ import { Button } from "@material-ui/core";
 import { signInWithGoogle } from "../../Services/auth";
 import { UserContext } from "../../Contexts/UserContext";
 
-export default function SignInBtn() {
+export default function SignInBtn({ label }) {
   const setUserInfo = React.useContext(UserContext).setUserInfo;
 
   async function handleSignIn() {
@@ -15,7 +15,7 @@ export default function SignInBtn() {
 
   return (
     <Button variant="contained" color="secondary" onClick={handleSignIn}>
-      Sign in
+      Sign in with Google
     </Button>
   );
 }

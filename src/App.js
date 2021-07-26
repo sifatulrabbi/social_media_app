@@ -1,5 +1,4 @@
 import React from "react";
-import { Navbar } from "./Components";
 import { Home } from "./Pages";
 import { UserContextProvider } from "./Contexts/UserContext";
 import { ThemeProvider, createTheme } from "@material-ui/core";
@@ -28,7 +27,6 @@ function App() {
     <UserContextProvider>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        <Navbar />
         <Home />
       </ThemeProvider>
     </UserContextProvider>

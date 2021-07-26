@@ -19,6 +19,7 @@ export function UserContextProvider({ children }) {
     }
 
     getPosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo]);
 
   async function updateUser() {
