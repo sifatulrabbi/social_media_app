@@ -12,7 +12,7 @@ export default function SignInBtn() {
     let userBySignIn = await signInWithGoogle();
 
     if (userBySignIn) setUserInfo(userBySignIn);
-    addNewUser(userBySignIn);
+    // addNewUser(userBySignIn);
   }
 
   return (

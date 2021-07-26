@@ -11,7 +11,7 @@ export default async function addNewPost(props) {
     const imgRef = storage.ref().child(props.image.name);
 
     await imgRef.put(props.image).then((res) => {
-      console.log(res);
+      console.log("Image uploaded");
     });
 
     await imgRef.getDownloadURL().then((res) => {
@@ -29,6 +29,6 @@ export default async function addNewPost(props) {
   await postRef
     .doc(uuidv4())
     .set(postObj)
-    .then(() => console.log("post uploaded"))
+    .then(() => console.log("Post uploaded!"))
     .catch((err) => console.log(err));
 }

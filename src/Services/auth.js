@@ -16,12 +16,11 @@ export async function signInWithGoogle() {
 }
 
 export async function logout() {
-  let logoutSuccess = false;
-
   await auth
     .signOut()
-    .then(() => (logoutSuccess = true))
+    .then(() => {
+      window.location.reload();
+      console.log("successfully logged out");
+    })
     .catch((err) => console.log(err.message));
-
-  return logoutSuccess;
 }

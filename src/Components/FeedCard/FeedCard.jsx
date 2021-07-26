@@ -2,9 +2,11 @@ import React from "react";
 import { Container, ImageList, ImageListItem, Paper, IconButton, Typography, FormControl, Input } from "@material-ui/core";
 import { ThumbDown, ThumbUp, Send } from "@material-ui/icons";
 import img from "../../Image/js-img.jpg";
+import { UserContext } from "../../Contexts/UserContext";
 import { useStyles } from "./FeedCardStyles";
 
 export default function FeedCard() {
+  const userInfo = React.useContext(UserContext).userInfo;
   const classes = useStyles();
 
   return (
@@ -36,7 +38,12 @@ export default function FeedCard() {
             </Typography>
           </div>
           <FormControl component="form" className={classes.comments}>
-            <Input id="comment" fullWidth placeholder="add a comment" />
+            <Input
+              id="comment"
+              fullWidth
+              placeholder={userInfo === null ? "login to comment" : "add a comment"}
+              disabled={userInfo === null}
+            />
             <div>
               <IconButton type="submit" style={{ padding: "10px" }}>
                 <Send style={{ width: "20px", height: "20px" }} />

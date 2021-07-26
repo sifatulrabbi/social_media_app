@@ -10,5 +10,7 @@ export default async function addNewUser(user) {
 
   const userRef = db.collection("users").doc(userName);
 
-  await userRef.set(userObject).then(() => console.log("log in successful"));
+  await userRef.set(userObject).then(() => console.log("Log in successful"));
+
+  return userName;
 }
