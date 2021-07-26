@@ -1,11 +1,9 @@
 import React from "react";
-import { storage } from "../firebase";
+import addNewPost from "../Services/addNewPost";
 
 export default function useCreatePost(user) {
   const [caption, setCaption] = React.useState("");
   const [image, setImage] = React.useState(null);
-  const [progress, setProgress] = React.useState(0);
-  const [fileUrl, setFileUrl] = React.useState();
 
   function captionChange(e) {
     const value = e.target.value;
@@ -22,18 +20,11 @@ export default function useCreatePost(user) {
     setImage(null);
   }
 
-  function handleUpload() {
-    console.log("uploading");
-
-    if (image) handleImgUpload();
-  }
-
-  async function handleImgUpload() {
-    const file = image;
-    const fileRef = storage.ref().child(file.name);
-
-    await fileRef.put(file);
-    setFileUrl(await fileRef.getDownloadURL());
+  async function handleUpload() {
+    await addNewPost({ user, image, caption }).then(() => {
+      setCaption("");
+      setImage(null);
+    });
   }
 
   return { caption, image, captionChange, imgChange, imgRemove, handleUpload };

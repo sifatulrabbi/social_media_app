@@ -1,12 +1,11 @@
 import { auth, provider } from "../firebase";
 
-export const signInWithGoogle = async () => {
+export async function signInWithGoogle() {
   let user = null;
 
   await auth
     .signInWithPopup(provider)
     .then((res) => {
-      console.log(res.user);
       user = res.user;
     })
     .catch((err) => {
@@ -14,10 +13,10 @@ export const signInWithGoogle = async () => {
     });
 
   return user;
-};
+}
 
-export const logout = async () => {
-  let logoutSuccess;
+export async function logout() {
+  let logoutSuccess = false;
 
   await auth
     .signOut()
@@ -25,4 +24,4 @@ export const logout = async () => {
     .catch((err) => console.log(err.message));
 
   return logoutSuccess;
-};
+}

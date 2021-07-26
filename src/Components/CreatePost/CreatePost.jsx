@@ -21,7 +21,7 @@ export default function CreatePost({ userInfo }) {
 
   return (
     <Container maxWidth={false} align="center" style={{ padding: 0 }}>
-      {true ? <MakePostCard props={props} /> : <SignIn />}
+      {userInfo ? <MakePostCard props={props} /> : <SignIn />}
     </Container>
   );
 }
