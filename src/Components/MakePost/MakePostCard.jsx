@@ -12,37 +12,12 @@ export default function MakePostCard({ props }) {
         <Typography variant="subtitle1" align="left">
           Create a Post
         </Typography>
-        <TextField
-          type="text"
-          multiline
-          fullWidth
-          placeholder="write a caption"
-          value={props.caption}
-          onChange={props.captionChange}
-        />
-        <Input
-          id="upload-photo"
-          className={classes.input}
-          color="primary"
-          variant="contained"
-          type="file"
-          onChange={props.imgChange}
-        />
-        <Grid
-          alignContent="flex-start"
-          alignItems="flex-start"
-          container
-          spacing={2}
-          className={classes.gridImgCont}
-        >
+        <TextField type="text" multiline fullWidth placeholder="write a caption" value={props.caption} onChange={props.captionChange} />
+        <Input id="upload-photo" className={classes.input} color="primary" variant="contained" type="file" onChange={props.imgChange} />
+        <Grid alignContent="flex-start" alignItems="flex-start" container spacing={2} className={classes.gridImgCont}>
           <Grid item>
             {props.image !== null && (
-              <img
-                src={URL.createObjectURL(props.image)}
-                alt="upload"
-                className={classes.gridImg}
-                onClick={props.imgRemove}
-              />
+              <img src={URL.createObjectURL(props.image)} alt="upload" className={classes.gridImg} onClick={props.imgRemove} />
             )}
           </Grid>
         </Grid>
@@ -50,13 +25,7 @@ export default function MakePostCard({ props }) {
           <Button variant="text" endIcon={<Add />} component="label" htmlFor="upload-photo">
             Photo
           </Button>
-          <Button
-            variant="text"
-            color="primary"
-            disabled={props.caption === ""}
-            endIcon={<Send />}
-            onClick={props.handleUpload}
-          >
+          <Button variant="text" color="primary" disabled={props.caption === ""} endIcon={<Send />} onClick={props.handleUpload}>
             Post
           </Button>
         </div>

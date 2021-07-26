@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Container,
-  ImageList,
-  ImageListItem,
-  Paper,
-  IconButton,
-  Typography,
-  FormControl,
-  Input,
-} from "@material-ui/core";
+import { Container, ImageList, ImageListItem, Paper, IconButton, Typography, FormControl, Input } from "@material-ui/core";
 import { ThumbDown, ThumbUp, Send } from "@material-ui/icons";
 import img from "../../Image/js-img.jpg";
 import { useStyles } from "./FeedCardStyles";
