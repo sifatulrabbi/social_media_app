@@ -8,6 +8,7 @@ import { logout } from "../../Services/auth";
 export default function Navbar() {
   const classes = useStyles();
   const userInfo = React.useContext(UserContext).userInfo;
+  const loginStatus = React.useContext(UserContext).loginStatus;
 
   function AvatarBtn() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,7 +40,7 @@ export default function Navbar() {
         <Typography variant="h5" color="inherit">
           Socialize
         </Typography>
-        {userInfo ? <AvatarBtn /> : <SignInBtn />}
+        {loginStatus ? <AvatarBtn /> : <SignInBtn />}
       </Container>
     </AppBar>
   );

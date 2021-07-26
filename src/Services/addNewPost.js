@@ -3,8 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export default async function addNewPost(props) {
   const userName = props.user.email.replace("@gmail.com", "").replace(".", "_");
-  const userRef = db.collection("users").doc(userName);
-  const postRef = userRef.collection("posts");
+  const postRef = db.collection("posts");
   let postObj = {};
 
   if (props.image) {
@@ -14,15 +13,23 @@ export default async function addNewPost(props) {
       console.log("Image uploaded");
     });
 
-    await imgRef.getDownloadURL().then((res) => {
+    await imgRef.getDownloadURL().then((photoURL) => {
       postObj = {
+        userName: userName,
+        displayName: props.user.displayName,
+        avatar: props.user.photoURL,
         caption: props.caption,
-        photoURL: res,
+        photoURL: photoURL,
+        comments: [],
       };
     });
   } else {
     postObj = {
+      userName: userName,
+      displayName: props.user.displayName,
+      avatar: props.user.photoURL,
       caption: props.caption,
+      comments: [],
     };
   }
 

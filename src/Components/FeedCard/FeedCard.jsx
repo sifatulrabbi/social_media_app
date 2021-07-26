@@ -1,55 +1,43 @@
 import React from "react";
-import { Container, ImageList, ImageListItem, Paper, IconButton, Typography, FormControl, Input } from "@material-ui/core";
-import { ThumbDown, ThumbUp, Send } from "@material-ui/icons";
-import img from "../../Image/js-img.jpg";
-import { UserContext } from "../../Contexts/UserContext";
+import { Container, Paper, IconButton, Typography, Divider, Avatar } from "@material-ui/core";
+import { ThumbDown, ThumbUp, Comment } from "@material-ui/icons";
 import { useStyles } from "./FeedCardStyles";
+import img from "../../Image/js-img.jpg";
 
-export default function FeedCard() {
-  const userInfo = React.useContext(UserContext).userInfo;
+export default function FeedCard({ imgURL, comments, caption, displayName, avatar, userName }) {
   const classes = useStyles();
 
   return (
-    <Container maxWidth={false} style={{ marginTop: "20px", padding: 0 }}>
-      <Paper>
-        <ImageList cols={1} rowHeight={220} style={{ padding: "5px" }}>
-          <ImageListItem>
-            <img src={img} alt="hello" />
-          </ImageListItem>
-        </ImageList>
-        <Container maxWidth="sm" className={classes.btnContainer}>
-          <IconButton className={classes.iconBtn} color="primary">
+    <Container maxWidth="sm" style={{ padding: 0, marginTop: "10px", height: "max-content" }}>
+      <Paper style={{ height: "max-content" }}>
+        <div className={classes.userInfo}>
+          <Avatar src={avatar} style={{ marginRight: "10px" }} />
+          <div>
+            <Typography variant="subtitle1" style={{ fontWeight: 500 }}>
+              {displayName}
+            </Typography>
+            <Typography variant="caption">{`@${userName}`}</Typography>
+          </div>
+        </div>
+        <div className={classes.imgContainer}>
+          <img src={imgURL} alt="" className={classes.img} />
+        </div>
+        <Container>
+          <Typography variant="body1" align="left" component="p" gutterBottom paragraph>
+            {caption}
+          </Typography>
+        </Container>
+        <Divider />
+        <Container className={classes.btnContainer}>
+          <IconButton className={classes.iconBtn}>
             <ThumbUp />
           </IconButton>
-          <IconButton className={classes.iconBtn} color="primary">
+          <IconButton className={classes.iconBtn}>
             <ThumbDown />
           </IconButton>
-        </Container>
-        <Container maxWidth="sm" className={classes.container}>
-          <Typography variant="subtitle1" gutterBottom>
-            Comments
-          </Typography>
-          <div>
-            <Typography variant="body1" component="button" className={classes.username}>
-              @username
-            </Typography>
-            <Typography variant="body2" component="span">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, error!
-            </Typography>
-          </div>
-          <FormControl component="form" className={classes.comments}>
-            <Input
-              id="comment"
-              fullWidth
-              placeholder={userInfo === null ? "login to comment" : "add a comment"}
-              disabled={userInfo === null}
-            />
-            <div>
-              <IconButton type="submit" style={{ padding: "10px" }}>
-                <Send style={{ width: "20px", height: "20px" }} />
-              </IconButton>
-            </div>
-          </FormControl>
+          <IconButton className={classes.iconBtn} style={{ marginLeft: "auto" }}>
+            <Comment />
+          </IconButton>
         </Container>
       </Paper>
     </Container>

@@ -1,39 +1,36 @@
 import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles({
-  container: {
-    paddingBottom: "20px",
-    marginTop: "15px",
+  userInfo: {
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    padding: "10px",
   },
 
-  btnContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-
-  comments: {
-    height: "max-content",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+  imgContainer: {
     width: "100%",
-    padding: 0,
-    marginTop: "15px",
+    height: "max-content",
+    padding: "0 8px",
+    marginBottom: "15px",
   },
 
-  username: {
-    backgroundColor: "transparent",
-    cursor: "pointer",
-    outline: "none",
-    border: "none",
-    fontWeight: "500",
-    padding: 0,
-    paddingRight: "5px",
+  img: {
+    width: "100%",
+    height: "auto",
+    borderRadius: "4px",
   },
 
   iconBtn: {
     height: "30px",
     width: "30px",
+    margin: "5px",
+    padding: 0,
+  },
+
+  btnContainer: {
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
   },
 });

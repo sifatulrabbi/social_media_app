@@ -1,6 +1,7 @@
 import { db } from "../firebase";
 
 export default async function addNewUser(user) {
+  let status = false;
   const userName = user.email.replace("@gmail.com", "").replace(".", "_");
   const userObject = {
     userName: userName,
@@ -10,7 +11,10 @@ export default async function addNewUser(user) {
 
   const userRef = db.collection("users").doc(userName);
 
-  await userRef.set(userObject).then(() => console.log("Log in successful"));
+  await userRef.set(userObject).then(() => {
+    console.log("Log in successful");
+    status = true;
+  });
 
-  return userName;
+  return status;
 }
