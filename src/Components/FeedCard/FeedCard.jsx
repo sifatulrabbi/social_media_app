@@ -16,7 +16,7 @@ export default function FeedCard({ imgURL, comments, caption, displayName, avata
             <Typography variant="subtitle1" style={{ fontWeight: 500 }}>
               {displayName}
             </Typography>
-            <Typography variant="caption">{`@${userName}`}</Typography>
+            <Typography variant="caption" style={{ cursor: "pointer" }}>{`@${userName}`}</Typography>
           </div>
         </div>
         <div className={classes.imgContainer}>

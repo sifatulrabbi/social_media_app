@@ -3,7 +3,6 @@ import React from "react";
 import { Button } from "@material-ui/core";
 import { signInWithGoogle } from "../../Services/auth";
 import { UserContext } from "../../Contexts/UserContext";
-import addNewUser from "../../Services/addNewUser";
 
 export default function SignInBtn() {
   const setUserInfo = React.useContext(UserContext).setUserInfo;
@@ -12,7 +11,6 @@ export default function SignInBtn() {
     let userBySignIn = await signInWithGoogle();
 
     if (userBySignIn) setUserInfo(userBySignIn);
-    // addNewUser(userBySignIn);
   }
 
   return (

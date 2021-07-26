@@ -18,7 +18,7 @@ export default function Home() {
           userName={post.userName}
           displayName={post.displayName}
           caption={post.caption}
-          imgURL={post.imgURL}
+          imgURL={post.photoURL}
           comments={post.comments}
         />
       ))}
