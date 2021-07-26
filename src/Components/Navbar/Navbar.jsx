@@ -22,7 +22,7 @@ export default function Navbar() {
   return (
     <AppBar align="start" position="fixed" className={classes.navbar}>
       <Container maxWidth={false} className={classes.container}>
-        <Typography variant="h5" color="inherit">
+        <Typography variant="h5" color="inherit" style={{ textTransform: "uppercase", fontWeight: "500" }}>
           Socialize
         </Typography>
         <div>
