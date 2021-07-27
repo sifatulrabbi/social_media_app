@@ -1,14 +1,11 @@
 import React from "react";
 import { Container } from "@material-ui/core";
-import MakePostCard from "../MakePost/MakePostCard";
-import useCreatePost from "../../Hooks/useCreatePost";
+import MakePostCard from "../MakePostCard/MakePostCard";
 
-export default function CreatePost({ userInfo }) {
-  const props = useCreatePost(userInfo);
-
+export default function CreatePost() {
   return (
     <Container maxWidth={false} align="center" style={{ padding: 0 }}>
-      <MakePostCard props={props} />
+      <MakePostCard />
     </Container>
   );
 }

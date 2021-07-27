@@ -1,20 +1,12 @@
-import React from "react";
-
+import React, { useContext } from "react";
 import { Button } from "@material-ui/core";
-import { signInWithGoogle } from "../../Services/auth";
-import { UserContext } from "../../Contexts/UserContext";
+import { FncContext } from "../../Contexts/FncContext";
 
-export default function SignInBtn({ label }) {
-  const setUserInfo = React.useContext(UserContext).setUserInfo;
-
-  async function handleSignIn() {
-    let userBySignIn = await signInWithGoogle();
-
-    if (userBySignIn) setUserInfo(userBySignIn);
-  }
+export default function SignInBtn() {
+  const { SignIn } = useContext(FncContext);
 
   return (
-    <Button variant="contained" color="secondary" onClick={handleSignIn}>
+    <Button variant="contained" color="secondary" onClick={SignIn}>
       Sign in with Google
     </Button>
   );

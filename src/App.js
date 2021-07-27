@@ -1,6 +1,5 @@
 import React from "react";
 import { Home } from "./Pages";
-import { UserContextProvider } from "./Contexts/UserContext";
 import DataContextProvider from "./Contexts/DataContext";
 import FncContextProvider from "./Contexts/FncContext";
 import { ThemeProvider, createTheme } from "@material-ui/core";
@@ -28,12 +27,10 @@ function App() {
   return (
     <DataContextProvider>
       <FncContextProvider>
-        <UserContextProvider>
-          <ThemeProvider theme={theme}>
-            <GlobalStyles />
-            <Home />
-          </ThemeProvider>
-        </UserContextProvider>
+        <ThemeProvider theme={theme}>
+          <GlobalStyles />
+          <Home />
+        </ThemeProvider>
       </FncContextProvider>
     </DataContextProvider>
   );

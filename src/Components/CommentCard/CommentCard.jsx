@@ -1,6 +1,6 @@
+import React from "react";
 import { Container, Typography, makeStyles, IconButton } from "@material-ui/core";
 import { ArrowUpward, ArrowDownward } from "@material-ui/icons";
-import React from "react";
 
 const useStyles = makeStyles({
   iconContainer: {

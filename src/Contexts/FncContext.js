@@ -4,27 +4,45 @@ import { DataContext } from "./DataContext";
 import { auth, db, provider, storage } from "../firebase";
 import { v4 as uuidv4 } from "uuid";
 
-const FncContext = createContext();
+export const FncContext = createContext();
 
 export default function FncContextProvider({ children }) {
-  const props = React.useContext(DataContext);
+  const {
+    user,
+    username,
+    displayName,
+    avatarURL,
+    caption,
+    image,
+    comments,
+    likes,
+    dislikes,
+    setUser,
+    setUsername,
+    setDisplayName,
+    setAvatarURL,
+    setCaption,
+    setImage,
+    setSignInStatus,
+    setPosts,
+  } = React.useContext(DataContext);
+
   const postsRef = db.collection("posts");
-  const userRef = db.collection("users");
 
   useEffect(() => {
     getPosts();
   }, []);
 
   useEffect(() => {
-    updateUserInfo(props.user);
-  }, [props.user]);
+    updateUserInfo();
+  }, [user]);
 
   //updating user info function
-  function updateUserInfo(user) {
-    if (!user) return;
-    props.setUsername(user.email.replace("@gmail.com", "").replace(".", "_"));
-    props.setDisplayName(user.displayName);
-    props.setAvatarURL(user.photoURL);
+  function updateUserInfo() {
+    if (user === null) return;
+    setUsername(user.email.replace("@gmail.com", "").replace(".", "_"));
+    setDisplayName(user.displayName);
+    setAvatarURL(user.photoURL);
   }
 
   //sign in function
@@ -32,8 +50,8 @@ export default function FncContextProvider({ children }) {
     await auth
       .signInWithPopup(provider)
       .then((res) => {
-        props.user = res.user;
-        props.setSignInStatus(true);
+        setUser(res.user);
+        setSignInStatus(true);
       })
       .catch((err) => {
         console.log(err.message);
@@ -46,7 +64,7 @@ export default function FncContextProvider({ children }) {
       .signOut()
       .then(() => {
         window.location.reload();
-        props.setSignInStatus(false);
+        setSignInStatus(false);
       })
       .catch((err) => console.log(err.message));
   }
@@ -59,65 +77,67 @@ export default function FncContextProvider({ children }) {
       });
       return postsObj;
     });
-    props.setPosts(posts);
+    setPosts(posts);
   }
 
   //uploading post function
   async function uploadPost() {
-    await uploadImage();
-    const post = makePost();
+    const url = await uploadImage();
+    const post = newPost(url);
 
     await postsRef
       .doc(post.id)
       .set(post)
-      .then((res) => {
-        window.location.reload();
-        console.log("Post uploaded!", res);
-        props.setImage(null);
-        props.setCaption("");
-        props.setPhotoURL("");
+      .then(() => {
+        setImage(null);
+        setCaption("");
+        getPosts();
       })
       .catch((err) => console.log(err));
   }
 
   async function uploadImage() {
-    if (props.image) {
-      const imgRef = storage.ref().child(props.image.name);
+    let url;
+    if (image) {
+      const imgRef = storage.ref("/images").child(image.name);
 
-      await imgRef.put(props.image).then((res) => {
-        console.log("Image uploaded");
+      await imgRef.put(image);
+
+      url = await imgRef.getDownloadURL(image.name).then((url) => {
+        return url;
       });
     }
+    return url;
   }
 
-  function makePost() {
+  function newPost(url) {
     const post = {
       id: uuidv4(),
-      username: props.username,
-      displayName: props.displayName,
-      avatarURL: props.avatarURL,
-      caption: props.caption,
-      photoURL: props.photoURL,
-      comments: props.comments,
-      likes: props.likes,
-      dislikes: props.dislikes,
+      username: username,
+      displayName: displayName,
+      avatarURL: avatarURL,
+      caption: caption,
+      photoURL: url,
+      comments: comments,
+      likes: likes,
+      dislikes: dislikes,
     };
     return post;
   }
   function imgChange(e) {
     const img = e.target.files[0];
     if (img) {
-      props.setImage(img);
+      setImage(img);
     }
   }
 
   function imgRemove() {
-    props.setImage(null);
+    setImage(null);
   }
 
   function captionChange(e) {
     const value = e.target.value;
-    props.setCaption(value);
+    setCaption(value);
   }
 
   return (

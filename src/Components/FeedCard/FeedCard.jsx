@@ -1,10 +1,24 @@
 import React from "react";
-import { Container, Paper, IconButton, Typography, Divider, Avatar } from "@material-ui/core";
+import {
+  Container,
+  Paper,
+  IconButton,
+  Typography,
+  Divider,
+  Avatar,
+} from "@material-ui/core";
 import { ThumbDown, ThumbUp, Comment } from "@material-ui/icons";
 import { useStyles } from "./FeedCardStyles";
 import Comments from "../Comments/Comments";
 
-export default function FeedCard({ imgURL, comments, caption, displayName, avatar, userName }) {
+export default function FeedCard({
+  imgURL,
+  comments,
+  caption,
+  displayName,
+  avatar,
+  userName,
+}) {
   const classes = useStyles();
   const [showComment, setShowComment] = React.useState(false);
 
@@ -13,7 +27,10 @@ export default function FeedCard({ imgURL, comments, caption, displayName, avata
   }
 
   return (
-    <Container maxWidth="sm" style={{ padding: 0, marginTop: "10px", height: "max-content" }}>
+    <Container
+      maxWidth="sm"
+      style={{ padding: 0, marginTop: "10px", height: "max-content" }}
+    >
       <Paper style={{ height: "max-content" }}>
         <div className={classes.userInfo}>
           <Avatar src={avatar} style={{ marginRight: "10px" }} />
@@ -21,7 +38,10 @@ export default function FeedCard({ imgURL, comments, caption, displayName, avata
             <Typography variant="subtitle1" style={{ fontWeight: 500 }}>
               {displayName}
             </Typography>
-            <Typography variant="caption" style={{ cursor: "pointer" }}>{`@${userName}`}</Typography>
+            <Typography
+              variant="caption"
+              style={{ cursor: "pointer" }}
+            >{`@${userName}`}</Typography>
           </div>
         </div>
         <div className={classes.imgContainer}>

@@ -21,7 +21,13 @@ export default function Login() {
         <Typography variant="h5" component="h1" color="inherit">
           Welcome to
         </Typography>
-        <Typography variant="h3" component="h1" gutterBottom color="inherit" style={{ fontWeight: "500", textTransform: "uppercase" }}>
+        <Typography
+          variant="h3"
+          component="h1"
+          gutterBottom
+          color="inherit"
+          style={{ fontWeight: "500", textTransform: "uppercase" }}
+        >
           Socialize
         </Typography>
         <SignInBtn />

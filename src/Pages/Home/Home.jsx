@@ -1,32 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container } from "@material-ui/core";
-import { Navbar, CreatePost, FeedCard } from "../../Components";
-import { UserContext } from "../../Contexts/UserContext";
+import { Navbar, CreatePost, FeedCard, Login } from "../../Components";
+import { DataContext } from "../../Contexts/DataContext";
 import { v4 as uuidv4 } from "uuid";
-import Login from "../../Components/Login/Login";
 
 export default function Home() {
-  const userInfo = React.useContext(UserContext).userInfo;
-  const posts = React.useContext(UserContext).posts;
-  const loginStatus = React.useContext(UserContext).loginStatus;
+  const { posts, signInStatus } = useContext(DataContext);
 
-  if (loginStatus) {
+  if (signInStatus) {
     return (
       <>
         <Navbar />
         <Container maxWidth="sm" style={{ marginTop: "90px" }}>
-          <CreatePost userInfo={userInfo} />
-          {posts.map((post) => (
-            <FeedCard
-              key={uuidv4()}
-              avatar={post.avatar}
-              userName={post.userName}
-              displayName={post.displayName}
-              caption={post.caption}
-              imgURL={post.photoURL}
-              comments={post.comments}
-            />
-          ))}
+          <CreatePost />
+          {posts.map((post) => {
+            return (
+              <FeedCard
+                key={uuidv4()}
+                avatar={post.avatarURL}
+                userName={post.username}
+                displayName={post.displayName}
+                caption={post.caption}
+                imgURL={post.photoURL}
+                comments={post.comments}
+              />
+            );
+          })}
           <div style={{ marginTop: "3rem", width: "100%" }} />
         </Container>
       </>
