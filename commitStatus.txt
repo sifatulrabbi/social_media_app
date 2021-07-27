@@ -1,1 +1,1 @@
-git add . && git commit -m "commit 6.2 style changed" && git push
+git add . && git commit -m "commit 7.2" && git push

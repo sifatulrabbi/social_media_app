@@ -11,14 +11,13 @@ export const useStyles = makeStyles({
   imgContainer: {
     width: "100%",
     height: "max-content",
-    padding: "0 8px",
-    marginBottom: "15px",
+    padding: "0px",
   },
 
   img: {
     width: "100%",
     height: "auto",
-    borderRadius: "4px",
+    // borderRadius: "4px",
   },
 
   iconBtn: {

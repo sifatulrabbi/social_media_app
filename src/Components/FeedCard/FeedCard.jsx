@@ -29,7 +29,11 @@ export default function FeedCard({
   return (
     <Container
       maxWidth="sm"
-      style={{ padding: 0, marginTop: "10px", height: "max-content" }}
+      style={{
+        padding: 0,
+        marginTop: "10px",
+        height: "max-content",
+      }}
     >
       <Paper style={{ height: "max-content" }}>
         <div className={classes.userInfo}>
@@ -44,9 +48,11 @@ export default function FeedCard({
             >{`@${userName}`}</Typography>
           </div>
         </div>
-        <div className={classes.imgContainer}>
-          <img src={imgURL} alt="" className={classes.img} />
-        </div>
+        {imgURL && (
+          <div className={classes.imgContainer}>
+            <img src={imgURL} alt="" className={classes.img} />
+          </div>
+        )}
         <Container>
           <Typography variant="body1" align="left" component="p" gutterBottom paragraph>
             {caption}

@@ -5,7 +5,11 @@ import CommentCard from "../CommentCard/CommentCard";
 
 export default function Comments({ comments, show }) {
   return (
-    <Container maxWidth="sm" align="left" style={{ display: !show && "none" }}>
+    <Container
+      maxWidth="sm"
+      align="left"
+      style={{ display: !show && "none", paddingBottom: "5px" }}
+    >
       <Typography
         variant="subtitle1"
         component="h6"

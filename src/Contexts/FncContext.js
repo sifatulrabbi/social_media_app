@@ -28,37 +28,48 @@ export default function FncContextProvider({ children }) {
   } = React.useContext(DataContext);
 
   const postsRef = db.collection("posts");
+  const usersRef = db.collection("users");
 
   useEffect(() => {
     getPosts();
   }, []);
 
   useEffect(() => {
+    addNewUserData();
     updateUserInfo();
+    console.log("Called!");
   }, [user]);
 
-  //updating user info function
-  function updateUserInfo() {
-    if (user === null) return;
+  async function addNewUserData() {
+    if (!user) return;
+    await usersRef.doc(username).set({ ...user });
+  }
+
+  function updateUserInfo(user) {
+    if (!user) return;
     setUsername(user.email.replace("@gmail.com", "").replace(".", "_"));
     setDisplayName(user.displayName);
     setAvatarURL(user.photoURL);
+    setUser(new User(user));
+
+    addNewUserData();
   }
 
-  //sign in function
   async function SignIn() {
+    let userFromLogin = null;
     await auth
       .signInWithPopup(provider)
       .then((res) => {
-        setUser(res.user);
-        setSignInStatus(true);
+        userFromLogin = res.user;
       })
       .catch((err) => {
         console.log(err.message);
       });
+
+    updateUserInfo(userFromLogin);
+    setSignInStatus(true);
   }
 
-  //logout function
   async function Logout() {
     await auth
       .signOut()
@@ -69,7 +80,6 @@ export default function FncContextProvider({ children }) {
       .catch((err) => console.log(err.message));
   }
 
-  // getting posts function
   async function getPosts() {
     const posts = await postsRef.get().then((res) => {
       const postsObj = res.docs.map((doc) => {
@@ -80,7 +90,6 @@ export default function FncContextProvider({ children }) {
     setPosts(posts);
   }
 
-  //uploading post function
   async function uploadPost() {
     const url = await uploadImage();
     const post = newPost(url);
@@ -138,6 +147,25 @@ export default function FncContextProvider({ children }) {
   function captionChange(e) {
     const value = e.target.value;
     setCaption(value);
+  }
+
+  class User {
+    constructor(user) {
+      this.uid = this.getUid(user);
+      this.username = this.getName(user);
+      this.displayName = user.displayName;
+      this.phoneNumber = user.phoneNumber;
+      this.avatarURL = user.photoURL;
+      this.email = user.email;
+    }
+
+    getUid(user) {
+      return user.providerData[0].uid;
+    }
+
+    getName(user) {
+      return user.email.replace("@gmail.com", "").replace(".", "_");
+    }
   }
 
   return (
