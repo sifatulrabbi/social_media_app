@@ -8,8 +8,8 @@ export default function useCreatePost() {
     useContext(DataContext);
   const [photoURL, setPhotoURL] = useState("");
 
-  function newPost() {
-    uploadImage();
+  async function newPost() {
+    await uploadImage();
 
     const post = {
       id: uuidV4(),
@@ -32,7 +32,6 @@ export default function useCreatePost() {
     await imgRef.put(image);
     await imgRef.getDownloadURL(image.name).then((url) => {
       setPhotoURL(url);
-      console.log(url);
     });
   }
 

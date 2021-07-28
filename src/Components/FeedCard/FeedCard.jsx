@@ -53,7 +53,7 @@ export default function FeedCard({
             <img src={imgURL} alt="" className={classes.img} />
           </div>
         )}
-        <Container>
+        <Container style={{ padding: "10px" }}>
           <Typography variant="body1" align="left" component="p" gutterBottom paragraph>
             {caption}
           </Typography>

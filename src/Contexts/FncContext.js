@@ -41,7 +41,7 @@ export default function FncContextProvider({ children }) {
   }
 
   async function uploadPost() {
-    const post = newPost();
+    const post = await newPost();
 
     await postsRef
       .doc(post.id)
