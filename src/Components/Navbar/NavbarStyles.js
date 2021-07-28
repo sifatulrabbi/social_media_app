@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles({
   navbar: {
-    height: "65px",
+    height: "max-content",
     color: "white",
   },
 

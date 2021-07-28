@@ -38,6 +38,7 @@ export default function MakePostCard() {
           container
           spacing={2}
           className={classes.gridImgCont}
+          style={{ display: !image && "none" }}
         >
           <Grid item>
             {image !== null && (
