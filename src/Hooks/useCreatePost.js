@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { DataContext } from "../Contexts/DataContext";
 import { v4 as uuidV4 } from "uuid";
 import { storage } from "../firebase";
@@ -6,10 +6,10 @@ import { storage } from "../firebase";
 export default function useCreatePost() {
   const { image, username, displayName, avatarURL, caption, comments, dislikes, likes } =
     useContext(DataContext);
-  const [photoURL, setPhotoURL] = useState("");
 
   async function newPost() {
-    await uploadImage();
+    let photoURL = await uploadImage();
+    if (!photoURL) photoURL = "";
 
     const post = {
       id: uuidV4(),
@@ -27,12 +27,15 @@ export default function useCreatePost() {
   }
 
   async function uploadImage() {
+    let URL;
     if (!image) return;
     const imgRef = storage.ref("/images").child(image.name);
     await imgRef.put(image);
     await imgRef.getDownloadURL(image.name).then((url) => {
-      setPhotoURL(url);
+      URL = url;
     });
+
+    return URL;
   }
 
   return { newPost };
