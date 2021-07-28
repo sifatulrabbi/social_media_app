@@ -2,8 +2,9 @@ import React from "react";
 import { Container, Divider, Typography } from "@material-ui/core";
 import AddCommentCard from "../AddCommentCard/AddCommentCard";
 import CommentCard from "../CommentCard/CommentCard";
+import { v4 as uuidv4 } from "uuid";
 
-export default function Comments({ comments, show }) {
+export default function Comments({ id, comments, show }) {
   return (
     <Container
       maxWidth="sm"
@@ -19,12 +20,12 @@ export default function Comments({ comments, show }) {
         Comments
       </Typography>
       {comments.map((comment) => (
-        <>
+        <div key={uuidv4()}>
           <Divider />
-          <CommentCard userName={comment.userName} comment={comment.comment} />
-        </>
+          <CommentCard userName={comment.username} comment={comment.comment} />
+        </div>
       ))}
-      <AddCommentCard />
+      <AddCommentCard id={id} />
     </Container>
   );
 }

@@ -1,14 +1,14 @@
 import React from "react";
 import { IconButton, Container, Input } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
+import useComments from "../../Hooks/useComments";
 
-export default function AddCommentCard() {
-  const [comment, setComment] = React.useState("");
+export default function AddCommentCard(id) {
+  const { addComment, handleComment, comment } = useComments();
 
-  function handleComment(e) {
-    setComment(e.target.value);
+  function handleAddComment() {
+    addComment(id.id);
   }
-
   return (
     <Container
       maxWidth="sm"
@@ -27,7 +27,12 @@ export default function AddCommentCard() {
         value={comment}
         onChange={handleComment}
       />
-      <IconButton color="primary" style={{ padding: "5px" }} disabled={comment === ""}>
+      <IconButton
+        color="primary"
+        style={{ padding: "5px" }}
+        disabled={comment === ""}
+        onClick={handleAddComment}
+      >
         <Add />
       </IconButton>
     </Container>

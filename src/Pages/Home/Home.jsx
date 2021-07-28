@@ -17,6 +17,7 @@ export default function Home() {
             return (
               <FeedCard
                 key={uuidv4()}
+                id={post.id}
                 avatar={post.avatarURL}
                 userName={post.username}
                 displayName={post.displayName}

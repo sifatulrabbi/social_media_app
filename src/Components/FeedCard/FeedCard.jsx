@@ -12,6 +12,7 @@ import { useStyles } from "./FeedCardStyles";
 import Comments from "../Comments/Comments";
 
 export default function FeedCard({
+  id,
   imgURL,
   comments,
   caption,
@@ -75,7 +76,7 @@ export default function FeedCard({
             <Comment />
           </IconButton>
         </Container>
-        <Comments comments={comments} show={showComment} />
+        <Comments comments={comments} id={id} show={showComment} />
       </Paper>
     </Container>
   );
