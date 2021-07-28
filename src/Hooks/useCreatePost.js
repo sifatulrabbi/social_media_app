@@ -32,6 +32,7 @@ export default function useCreatePost() {
     await imgRef.put(image);
     await imgRef.getDownloadURL(image.name).then((url) => {
       setPhotoURL(url);
+      console.log(url);
     });
   }
 
