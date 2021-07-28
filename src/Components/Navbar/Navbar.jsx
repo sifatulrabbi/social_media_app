@@ -33,7 +33,7 @@ export default function Navbar() {
         <Typography
           variant="h5"
           color="inherit"
-          style={{ textTransform: "uppercase", fontWeight: "500" }}
+          style={{ textTransform: "uppercase", fontWeight: "500", fontSize: "22px" }}
         >
           Socialize
         </Typography>
