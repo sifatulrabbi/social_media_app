@@ -1,6 +1,6 @@
 {
-  "name": "socialize-full-stack-app",
-  "version": "0.1.1",
+  "name": "socialize-reactapp",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.2",

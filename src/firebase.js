@@ -1,12 +1,12 @@
 import firebase from "firebase";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyARM6q7_iEy_97LwhJs8JaYnXy1nMsBqoA",
-  authDomain: "insta-like-app-0.firebaseapp.com",
-  projectId: "insta-like-app-0",
-  storageBucket: "insta-like-app-0.appspot.com",
-  messagingSenderId: "532750834619",
-  appId: "1:532750834619:web:b6775867f7186108e2c29e",
+  apiKey: "AIzaSyDNmDpq3s-dpdLgQ-H6iCwtARednmapE6c",
+  authDomain: "socialize-reactapp.firebaseapp.com",
+  projectId: "socialize-reactapp",
+  storageBucket: "socialize-reactapp.appspot.com",
+  messagingSenderId: "106779814246",
+  appId: "1:106779814246:web:141ae5940374b66fc4c0a7",
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
