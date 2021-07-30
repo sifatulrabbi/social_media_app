@@ -1,38 +1,27 @@
 import React from "react";
-import { Home } from "./Pages";
-import DataContextProvider from "./Contexts/DataContext";
-import FncContextProvider from "./Contexts/FncContext";
-import { ThemeProvider, createTheme } from "@material-ui/core";
-import { blue, yellow } from "@material-ui/core/colors";
-import GlobalStyles from "./globalStyles";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      light: blue[200],
-      main: blue[400],
-      dark: blue[600],
-      contrastText: "#fff",
-    },
-    secondary: {
-      light: yellow[400],
-      main: yellow[600],
-      dark: yellow[700],
-      contrastText: "#000",
-    },
-  },
-});
+import { ThemeProvider } from "@material-ui/core";
+import { GlobalStyles, theme } from "./globalStyles";
+import { HomePage, LoginPage, SignUpPage, ForgotPassPage, DashboardPage } from "./Pages";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { AuthProvider } from "./Contexts/AuthContext";
+import { PrivateRoute } from "./Components";
 
 function App() {
   return (
-    <DataContextProvider>
-      <FncContextProvider>
-        <ThemeProvider theme={theme}>
-          <GlobalStyles />
-          <Home />
-        </ThemeProvider>
-      </FncContextProvider>
-    </DataContextProvider>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <AuthProvider>
+          <Switch>
+            <PrivateRoute exact path="/" component={HomePage} />
+            <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/sign-up" component={SignUpPage} />
+            <Route exact path="/reset-password" component={ForgotPassPage} />
+            <Route exact path="/dashboard" component={DashboardPage} />
+          </Switch>
+        </AuthProvider>
+      </ThemeProvider>
+    </Router>
   );
 }
 
