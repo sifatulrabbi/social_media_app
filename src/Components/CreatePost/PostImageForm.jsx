@@ -1,10 +1,11 @@
+import React from "react";
 import { IconButton } from "@material-ui/core";
 import { AddPhotoAlternate } from "@material-ui/icons";
-import React from "react";
 import styled from "styled-components";
+import { SetPostContext } from "../../Contexts/SetPostContext";
 
 export default function PostImageForm({ setImage }) {
-  function handleChange(e) {
+  async function handleChange(e) {
     setImage(e.target.files[0]);
   }
 

@@ -1,13 +1,32 @@
 import React from "react";
-import { Container, Paper, makeStyles, Button } from "@material-ui/core";
+import {
+  Container,
+  Paper,
+  makeStyles,
+  Button,
+  CircularProgress,
+} from "@material-ui/core";
 import styled from "styled-components";
 import { theme } from "../../Contexts";
 import PostTextArea from "./PostTextArea";
 import PostImageForm from "./PostImageForm";
+import { useSetPost } from "../../Contexts/SetPostContext";
 
 const useStyles = makeStyles({
   paper: {
     padding: theme.spacing(1),
+  },
+
+  loadingScreen: {
+    position: "absolute",
+    top: 0,
+    right: "24px",
+    left: "24px",
+    bottom: 0,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(255,255,255, 0.2)",
   },
 });
 
@@ -15,14 +34,20 @@ export default function CreatePost() {
   const classes = useStyles();
   const [text, setText] = React.useState("");
   const [image, setImage] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
+  const { setPost, uploadImage, getImageURL } = useSetPost();
 
-  function onPost() {
-    const postObj = {
-      caption: text,
-      image: image,
-    };
+  async function onPost() {
+    setLoading(true);
 
-    console.log(postObj);
+    try {
+      await uploadImage(image);
+      await getImageURL(image);
+      await setPost(text);
+      setLoading(false);
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   function removeImg() {
@@ -30,7 +55,12 @@ export default function CreatePost() {
   }
 
   return (
-    <Container>
+    <Container maxWidth="sm" style={{ position: "relative" }}>
+      {loading && (
+        <div className={classes.loadingScreen}>
+          <CircularProgress />
+        </div>
+      )}
       <Paper className={classes.paper}>
         <PostTextArea label="Create a post" text={text} setText={setText} />
         <ImgView image={image}>

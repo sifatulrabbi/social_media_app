@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Button } from "@material-ui/core";
-import { theme } from "../../Contexts";
+import { Button, CircularProgress } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
 import { useAuth } from "../../Contexts/AuthContext";
 
 export default function LoginButton() {
@@ -26,7 +24,7 @@ export default function LoginButton() {
 
   return (
     <Button size="large" variant="contained" color="secondary" onClick={handleLogin}>
-      Login with Google
+      {loading ? <CircularProgress /> : "Login with Google"}
     </Button>
   );
 }
