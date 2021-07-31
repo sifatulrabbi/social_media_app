@@ -34,23 +34,22 @@ const comments = [
   },
 ];
 
-export default function FeedCard() {
+export default function FeedCard({ post }) {
   const [showComment, setShowComment] = useState(false);
 
   return (
     <CardWrapper>
       <Container maxWidth="sm">
         <Paper>
-          <FeedUserInfo name={"This is User"} time={"Tue, 20 July, 2021"} />
+          <FeedUserInfo
+            avatarURL={post.avatarURL}
+            name={post.displayName}
+            time={"Tue, 20 July, 2021"}
+          />
           <Divider />
-          <FeedImage imgURL={image1} />
+          <FeedImage imgURL={post.photoURL} />
           <div className="container">
-            <Typography variant="body1">
-              Create a user authentication system with the help of firebase. Not only that
-              signing up will require full name, user email, user password, a @username
-              for logging in and lastly a profile picture. And this user data will be send
-              to the firestore database.
-            </Typography>
+            <Typography variant="body1">{post.caption}</Typography>
           </div>
           <FeedBottom
             showComment={showComment}

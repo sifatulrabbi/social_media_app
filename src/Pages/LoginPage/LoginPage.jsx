@@ -1,20 +1,27 @@
 import React from "react";
-import { Container, Link as MuiLink } from "@material-ui/core";
+import { Container, Typography } from "@material-ui/core";
 import styled from "styled-components";
-import { LoginForm } from "../../Components";
-import { Link } from "react-router-dom";
+import { LoginButton } from "../../Components";
+import { theme } from "../../Contexts";
 
 export default function TestPage() {
   return (
     <PageContainer>
-      <Container maxWidth="sm">
-        <LoginForm />
-        <div className="wrapper">
-          Need an account ?
-          <Link to="/sign-up" style={{ marginLeft: "5px" }}>
-            <MuiLink component="span">Sign Up</MuiLink>
-          </Link>
-        </div>
+      <Container maxWidth="sm" align="center">
+        <Typography align="center" variant="h5" component="h3" color="textPrimary">
+          Welcome to
+        </Typography>
+        <Typography
+          align="center"
+          variant="h3"
+          component="h1"
+          color="textPrimary"
+          gutterBottom
+          style={{ textTransform: "uppercase", fontWeight: 500 }}
+        >
+          Socialize
+        </Typography>
+        <LoginButton />
       </Container>
     </PageContainer>
   );
@@ -26,14 +33,5 @@ const PageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: max-content;
-    margin-top: 20px;
-    color: #e9e9e9;
-  }
+  background-color: ${theme.palette.primary.main};
 `;

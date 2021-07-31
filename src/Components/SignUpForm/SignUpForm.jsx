@@ -17,7 +17,7 @@ export default function SignUpForm() {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
-  const { signup, sendUserInfo } = useAuth();
+  const { signup, addUserInfo } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -33,7 +33,7 @@ export default function SignUpForm() {
       setError("");
       setLoading(true);
       await signup(email, password);
-      await sendUserInfo(username, fullName, email);
+      await addUserInfo(username, fullName, email);
       history.push("/");
     } catch (err) {
       setError(err.message ? err.message : "Failed to create a user!");

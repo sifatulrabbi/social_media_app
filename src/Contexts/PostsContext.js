@@ -1,12 +1,8 @@
 import { CircularProgress } from "@material-ui/core";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { db } from "../firebase";
 
-const PostsContext = createContext();
-
-export function usePosts() {
-  return useContext(PostsContext);
-}
+export const PostsContext = createContext();
 
 export function PostsProvider({ children }) {
   const [posts, setPosts] = useState([]);
@@ -23,9 +19,8 @@ export function PostsProvider({ children }) {
           // doc.data() is never undefined for query doc snapshots
           arrayOfPosts.push(doc.data());
         });
+        setPosts([...arrayOfPosts]);
       });
-
-    setPosts(arrayOfPosts);
   }
 
   useEffect(() => {

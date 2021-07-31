@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, makeStyles } from "@material-ui/core";
 import { CreatePost, FeedCard, Navbar } from "../../Components";
 import styled from "styled-components";
-import { usePosts } from "../../Contexts";
+import { PostsContext } from "../../Contexts";
 
 const useStyles = makeStyles({
   root: {
@@ -14,13 +14,15 @@ const useStyles = makeStyles({
 
 export default function HomePage() {
   const classes = useStyles();
-  const posts = usePosts();
+  const posts = useContext(PostsContext);
 
   return (
     <Container maxWidth="sm" className={classes.root}>
       <Navbar />
       <CreatePost />
-      <NewsFeed>{posts && posts.map((post) => <FeedCard key={post.id} />)}</NewsFeed>
+      <NewsFeed>
+        {posts && posts.map((post) => <FeedCard key={post.id} post={post} />)}
+      </NewsFeed>
     </Container>
   );
 }

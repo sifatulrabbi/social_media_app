@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { auth, db } from "../firebase";
+import { auth, db, provider } from "../firebase";
 import { CircularProgress } from "@material-ui/core";
 
 const AuthContext = createContext();
@@ -17,33 +17,17 @@ export function AuthProvider({ children }) {
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return auth.signInWithPopup(provider);
   }
 
-  function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
-  }
-
-  function sendUserInfo(username, fullName, email) {
+  function addUserInfo(username, fullName, email) {
     const userObject = {
       username: username,
       displayName: fullName,
       email: email,
     };
 
-    return db.collection("users").doc(username).set(userObject);
-  }
-
-  function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email);
-  }
-
-  function updateEmail(email) {
-    return currentUser.updateEmail(email);
-  }
-
-  function updatePassword(password) {
-    return currentUser.updatePassword(password);
+    db.collection("users").doc(username).set(userObject);
   }
 
   useEffect(() => {
@@ -57,13 +41,9 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
-    signup,
-    sendUserInfo,
+    addUserInfo,
     login,
     logout,
-    resetPassword,
-    updateEmail,
-    updatePassword,
   };
 
   return (

@@ -3,10 +3,10 @@ import React from "react";
 import styled from "styled-components";
 import AvatarBtn from "../AvatarBtn/AvatarBtn";
 
-export default function FeedUserInfo({ name, time }) {
+export default function FeedUserInfo({ avatarURL, name, time }) {
   return (
     <div className="container" style={{ display: "flex" }}>
-      <AvatarBtn noMenu />
+      <AvatarBtn noMenu avatarURL={avatarURL} />
       <NameWrapper>
         <Typography variant="subtitle1">{name}</Typography>
         <Typography variant="caption">{time}</Typography>
