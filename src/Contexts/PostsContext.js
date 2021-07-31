@@ -1,8 +1,12 @@
+import { createContext, useContext, useEffect, useState } from "react";
 import { CircularProgress } from "@material-ui/core";
-import { createContext, useEffect, useState } from "react";
 import { db } from "../firebase";
 
-export const PostsContext = createContext();
+const PostsContext = createContext();
+
+export function useGetPosts() {
+  return useContext(PostsContext);
+}
 
 export function PostsProvider({ children }) {
   const [posts, setPosts] = useState([]);
@@ -34,7 +38,7 @@ export function PostsProvider({ children }) {
   }, []);
 
   return (
-    <PostsContext.Provider value={posts}>
+    <PostsContext.Provider value={{ posts, getPosts }}>
       {loading ? (
         <div
           style={{

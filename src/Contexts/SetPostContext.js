@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import { storage } from "../firebase";
+import { db, storage } from "../firebase";
 import { useAuth } from "./AuthContext";
 import { v4 as uuidv4 } from "uuid";
 
@@ -11,33 +11,46 @@ export function SetPostProvider({ children }) {
   const storageRef = storage.ref();
 
   function uploadImage(imageFile) {
+    if (!imageFile) return;
     const imagesRef = storageRef.child(`images/${imageFile.name}`);
-
     return imagesRef.put(imageFile);
   }
 
-  function getImageURL(imageFile) {
-    storageRef
+  async function getImageURL(imageFile) {
+    if (!imageFile) return;
+    return await storageRef
       .child(`images/${imageFile.name}`)
       .getDownloadURL()
-      .then((url) => setImageURL(url));
+      .then((url) => {
+        setImageURL(url);
+      });
   }
 
   function setPost(caption) {
-    const postObj = {
-      postId: uuidv4(),
-      displayName: currentUser.displayName,
-      caption: caption,
-      imageURL: imageURL,
-    };
+    const postObj = createNewPost(caption);
 
-    console.log(postObj);
+    return db
+      .collection("posts")
+      .doc(postObj.id)
+      .set({ ...postObj });
+  }
+
+  function createNewPost(text) {
+    const obj = {};
+
+    obj.id = uuidv4();
+    obj.displayName = currentUser.displayName;
+    obj.caption = text;
+    obj.photoURL = imageURL;
+    obj.avatarURL = currentUser.photoURL;
+
+    return obj;
   }
 
   const value = {
     uploadImage,
-    getImageURL,
     setPost,
+    getImageURL,
   };
 
   return <SetPostContext.Provider value={value}>{children}</SetPostContext.Provider>;

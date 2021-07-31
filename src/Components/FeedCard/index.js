@@ -4,35 +4,7 @@ import styled from "styled-components";
 import { theme } from "../../Contexts";
 import FeedUserInfo from "./FeedUserInfo";
 import FeedImage from "./FeedImage";
-import { image1 } from "../../Images";
 import FeedBottom from "./FeedBottom";
-
-const comments = [
-  {
-    username: "@sifatulIslam",
-    text: "Create a user authentication system with the help of firebase. Let's go!!",
-  },
-  {
-    username: "@sifatulIslam",
-    text: "Create a user authentication system with the help of firebase. Let's go!!",
-  },
-  {
-    username: "@sifatulIslam",
-    text: "Create a user authentication system with the help of firebase. Let's go!!",
-  },
-  {
-    username: "@sifatulIslam",
-    text: "Create a user authentication system with the help of firebase. Let's go!!",
-  },
-  {
-    username: "@sifatulIslam",
-    text: "Create a user authentication system with the help of firebase. Let's go!!",
-  },
-  {
-    username: "@sifatulIslam",
-    text: "Create a user authentication system with the help of firebase. Let's go!!",
-  },
-];
 
 export default function FeedCard({ post }) {
   const [showComment, setShowComment] = useState(false);
@@ -55,7 +27,7 @@ export default function FeedCard({ post }) {
             showComment={showComment}
             theme={theme}
             setShowComment={setShowComment}
-            comments={comments}
+            comments={["hello"]}
           />
         </Paper>
       </Container>

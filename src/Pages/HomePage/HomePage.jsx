@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Container, makeStyles } from "@material-ui/core";
 import { CreatePost, FeedCard, Navbar } from "../../Components";
 import styled from "styled-components";
-import { PostsContext } from "../../Contexts";
+import { useGetPosts } from "../../Contexts";
 
 const useStyles = makeStyles({
   root: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 
 export default function HomePage() {
   const classes = useStyles();
-  const posts = useContext(PostsContext);
+  const { posts } = useGetPosts();
 
   return (
     <Container maxWidth="sm" className={classes.root}>

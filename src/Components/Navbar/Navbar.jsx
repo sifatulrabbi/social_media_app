@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Typography, makeStyles } from "@material-ui/core";
 import AvatarBtn from "../AvatarBtn/AvatarBtn";
-import { theme } from "../../Contexts";
+import { theme, useAuth } from "../../Contexts";
 
 export const useStyles = makeStyles({
   navbar: {
@@ -22,13 +22,14 @@ export const useStyles = makeStyles({
 
 export default function Navbar() {
   const classes = useStyles();
+  const { currentUser } = useAuth();
 
   return (
     <AppBar align="start" color="inherit" position="fixed" className={classes.navbar}>
       <Typography variant="h5" component="h1" className={classes.name}>
         SOCIALIZE
       </Typography>
-      <AvatarBtn />
+      <AvatarBtn avatarURL={currentUser.photoURL} />
     </AppBar>
   );
 }

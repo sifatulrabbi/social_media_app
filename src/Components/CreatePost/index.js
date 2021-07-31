@@ -7,7 +7,7 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import styled from "styled-components";
-import { theme } from "../../Contexts";
+import { theme, useGetPosts } from "../../Contexts";
 import PostTextArea from "./PostTextArea";
 import PostImageForm from "./PostImageForm";
 import { useSetPost } from "../../Contexts/SetPostContext";
@@ -18,6 +18,7 @@ const useStyles = makeStyles({
   },
 
   loadingScreen: {
+    zIndex: 2000,
     position: "absolute",
     top: 0,
     right: "24px",
@@ -36,6 +37,7 @@ export default function CreatePost() {
   const [image, setImage] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const { setPost, uploadImage, getImageURL } = useSetPost();
+  const { getPosts } = useGetPosts();
 
   async function onPost() {
     setLoading(true);
@@ -45,6 +47,8 @@ export default function CreatePost() {
       await getImageURL(image);
       await setPost(text);
       setLoading(false);
+
+      getPosts();
     } catch (err) {
       console.log(err.message);
     }
