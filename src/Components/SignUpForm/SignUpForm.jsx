@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useAuth, theme } from "../../Contexts";
 import {
   Button,
   Paper,
@@ -7,16 +9,15 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import { theme } from "../../globalStyles";
-import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { useAuth } from "../../Contexts/AuthContext";
 
 export default function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const { signup } = useAuth();
+  const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
+  const { signup, sendUserInfo } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -32,6 +33,7 @@ export default function SignUpForm() {
       setError("");
       setLoading(true);
       await signup(email, password);
+      await sendUserInfo(username, fullName, email);
       history.push("/");
     } catch (err) {
       setError(err.message ? err.message : "Failed to create a user!");
@@ -83,6 +85,28 @@ export default function SignUpForm() {
           error={Boolean(error)}
           value={passwordConfirm}
           onChange={(e) => setPasswordConfirm(e.target.value)}
+        />
+        <TextField
+          fullWidth
+          type="text"
+          variant="outlined"
+          label="User name"
+          className="input"
+          required
+          error={Boolean(error)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <TextField
+          fullWidth
+          type="text"
+          variant="outlined"
+          label="Full name"
+          className="input"
+          required
+          error={Boolean(error)}
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
         />
         <div className="divider" />
         <Button

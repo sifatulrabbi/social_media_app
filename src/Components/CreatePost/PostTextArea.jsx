@@ -13,7 +13,6 @@ export default function PostTextArea({ label, text, setText }) {
         color="primary"
         fullWidth
         multiline
-        variant="outlined"
         label={label}
         value={text}
         onChange={handleChange}
@@ -29,8 +28,4 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   height: max-content;
-
-  textarea {
-    font-size: 16px;
-  }
 `;

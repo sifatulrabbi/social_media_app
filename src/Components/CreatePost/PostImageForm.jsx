@@ -1,4 +1,5 @@
-import { Button } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
+import { AddPhotoAlternate } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 
@@ -10,9 +11,9 @@ export default function PostImageForm({ setImage }) {
   return (
     <Container>
       <input type="file" id="img-input" onChange={handleChange} />
-      <Button variant="text" component="label" htmlFor="img-input">
-        Photo
-      </Button>
+      <IconButton variant="text" color="secondary" component="label" htmlFor="img-input">
+        <AddPhotoAlternate color="inherit" />
+      </IconButton>
     </Container>
   );
 }

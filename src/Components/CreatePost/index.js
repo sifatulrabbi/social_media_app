@@ -1,9 +1,9 @@
 import React from "react";
 import { Container, Paper, makeStyles, Button } from "@material-ui/core";
 import styled from "styled-components";
-import { theme } from "../../globalStyles";
-import PostTextArea from "../PostTextArea/PostTextArea";
-import PostImageForm from "../PostImageForm/PostImageForm";
+import { theme } from "../../Contexts";
+import PostTextArea from "./PostTextArea";
+import PostImageForm from "./PostImageForm";
 
 const useStyles = makeStyles({
   paper: {
@@ -40,7 +40,7 @@ export default function CreatePost() {
         </ImgView>
         <Wrapper>
           <PostImageForm image={image} setImage={setImage} />
-          <Button variant="contained" color="primary" disableElevation onClick={onPost}>
+          <Button variant="text" color="primary" disableElevation onClick={onPost}>
             Post
           </Button>
         </Wrapper>

@@ -34,5 +34,6 @@ const PageContainer = styled.div`
     width: 100%;
     height: max-content;
     margin-top: 20px;
+    color: #e9e9e9;
   }
 `;

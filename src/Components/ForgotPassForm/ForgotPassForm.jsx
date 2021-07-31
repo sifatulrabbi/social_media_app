@@ -7,7 +7,7 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import { theme } from "../../globalStyles";
+import { theme } from "../../Contexts";
 import styled from "styled-components";
 import { useAuth } from "../../Contexts/AuthContext";
 import { Link } from "react-router-dom";

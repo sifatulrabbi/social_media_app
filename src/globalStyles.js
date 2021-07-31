@@ -1,36 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { createTheme, responsiveFontSizes } from "@material-ui/core";
-import { blue, lightBlue, yellow } from "@material-ui/core/colors";
-
-const lightTheme = createTheme({
-  palette: {
-    primary: {
-      light: blue[200],
-      main: blue[400],
-      dark: blue[600],
-      contrastText: "#fff",
-    },
-
-    secondary: {
-      light: yellow[400],
-      main: yellow[600],
-      dark: yellow[700],
-      contrastText: "#000",
-    },
-
-    info: {
-      light: lightBlue[200],
-      main: lightBlue[400],
-      dark: lightBlue[600],
-    },
-  },
-
-  typography: {
-    fontFamily: ["Roboto", "sans-serif"].join(","),
-  },
-});
-
-export const theme = responsiveFontSizes(lightTheme);
+import { theme } from "./Contexts/ThemeContext";
 
 export const GlobalStyles = createGlobalStyle`
   html {
@@ -49,7 +18,7 @@ export const GlobalStyles = createGlobalStyle`
     font-family: "Roboto", sans-serif;
     min-height: 100vh;
     max-width: 100vw;
-    background-color: #e9e9e9;
+    background-color: ${theme.palette.background.default};
   }
 
   button, input, textarea {

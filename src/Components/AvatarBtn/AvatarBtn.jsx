@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, Menu, MenuItem, IconButton, makeStyles } from "@material-ui/core";
-import { theme } from "../../globalStyles";
+import { theme } from "../../Contexts";
 import { useAuth } from "../../Contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 

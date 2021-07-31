@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Typography, makeStyles } from "@material-ui/core";
 import AvatarBtn from "../AvatarBtn/AvatarBtn";
-import { theme } from "../../globalStyles";
+import { theme } from "../../Contexts";
 
 export const useStyles = makeStyles({
   navbar: {
@@ -11,7 +11,6 @@ export const useStyles = makeStyles({
     justifyContent: "space-between",
     height: "50px",
     padding: "0 1rem",
-    backgroundColor: "#fff",
     boxShadow: theme.shadows[2],
   },
 
@@ -25,7 +24,7 @@ export default function Navbar() {
   const classes = useStyles();
 
   return (
-    <AppBar align="start" position="fixed" className={classes.navbar}>
+    <AppBar align="start" color="inherit" position="fixed" className={classes.navbar}>
       <Typography variant="h5" component="h1" className={classes.name}>
         SOCIALIZE
       </Typography>
