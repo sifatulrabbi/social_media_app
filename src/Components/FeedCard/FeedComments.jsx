@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { Typography } from "@material-ui/core";
 
-export default function FeedComments({ comments }) {
+export default function FeedComments() {
   return (
     <Container>
       <Typography variant="subtitle2">Comments</Typography>
       <div style={{ marginTop: "1rem" }} />
-      {comments.map((comment) => (
+      {/* {comments.map((comment) => (
         <div style={{ marginBottom: "8px" }} key={Math.random() * 100}>
           <Typography
             variant="subtitle2"
@@ -20,7 +20,7 @@ export default function FeedComments({ comments }) {
             {comment.text}
           </Typography>
         </div>
-      ))}
+      ))} */}
     </Container>
   );
 }
