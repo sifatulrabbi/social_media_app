@@ -8,7 +8,6 @@ import {
   CommentsProvider,
   CustomThemeProvider,
   PostsProvider,
-  SetPostProvider,
 } from "./Contexts";
 
 function App() {
@@ -18,17 +17,15 @@ function App() {
         <GlobalStyles />
         <AuthProvider>
           <PostsProvider>
-            <SetPostProvider>
-              <CommentsProvider>
-                <Switch>
-                  <PrivateRoute exact path="/" component={HomePage} />
-                  <Route exact path="/login" component={LoginPage} />
-                  <Route exact path="/sign-up" component={SignUpPage} />
-                  <Route exact path="/reset-password" component={ForgotPassPage} />
-                  <Route exact path="/dashboard" component={DashboardPage} />
-                </Switch>
-              </CommentsProvider>
-            </SetPostProvider>
+            <CommentsProvider>
+              <Switch>
+                <PrivateRoute exact path="/" component={HomePage} />
+                <Route exact path="/login" component={LoginPage} />
+                <Route exact path="/sign-up" component={SignUpPage} />
+                <Route exact path="/reset-password" component={ForgotPassPage} />
+                <Route exact path="/dashboard" component={DashboardPage} />
+              </Switch>
+            </CommentsProvider>
           </PostsProvider>
         </AuthProvider>
       </CustomThemeProvider>

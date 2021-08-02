@@ -1,55 +1,56 @@
-import React from "react";
-import {
-  Container,
-  Paper,
-  makeStyles,
-  Button,
-  CircularProgress,
-} from "@material-ui/core";
-import styled from "styled-components";
-import { theme, useGetPosts } from "../../Contexts";
+import React, { useState } from "react";
+import { Container, Paper, Button, Snackbar } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
+import { useStyles, ImgView, Wrapper } from "./styles";
 import PostTextArea from "./PostTextArea";
 import PostImageForm from "./PostImageForm";
-import { useSetPost } from "../../Contexts/SetPostContext";
-
-const useStyles = makeStyles({
-  paper: {
-    padding: theme.spacing(1),
-  },
-
-  loadingScreen: {
-    zIndex: 2000,
-    position: "absolute",
-    top: 0,
-    right: "24px",
-    left: "24px",
-    bottom: 0,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(255,255,255, 0.2)",
-  },
-});
+import { v4 as uuidv4 } from "uuid";
+import { useGetPosts, useAuth } from "../../Contexts";
+import { db, storage } from "../../firebase";
 
 export default function CreatePost() {
   const classes = useStyles();
-  const [text, setText] = React.useState("");
-  const [image, setImage] = React.useState(null);
-  const [loading, setLoading] = React.useState(false);
-  const { setPost, uploadImage, getImageURL } = useSetPost();
+  const [text, setText] = useState("");
+  const [image, setImage] = useState(null);
+  const [error, setError] = useState(null);
+  const [open, setOpen] = useState(false);
+
   const { getPosts } = useGetPosts();
+  const { currentUser } = useAuth();
+  const storageRef = storage.ref();
 
   async function onPost() {
-    setLoading(true);
+    setError("");
+    setOpen(false);
+
+    let post = {};
 
     try {
-      await uploadImage(image);
-      await getImageURL(image);
-      await setPost(text);
-      setLoading(false);
+      if (!text) {
+        setError("Unable to create a post");
+        setOpen(true);
+        return;
+      }
+
+      if (image) {
+        const imagesRef = storageRef.child(`images/${image.name}`);
+
+        await imagesRef.put(image);
+        const url = await imagesRef.getDownloadURL();
+        post = createNewPost(url);
+      } else {
+        post = createNewPost();
+      }
+
+      await db.collection("posts").doc(post.id).set(post);
+
+      setImage(null);
+      setText("");
+      setOpen(true);
 
       getPosts();
     } catch (err) {
+      setError("Post failed to upload");
       console.log(err.message);
     }
   }
@@ -58,14 +59,34 @@ export default function CreatePost() {
     setImage(null);
   }
 
+  function handleClose(e, reason) {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  }
+
+  function createNewPost(url = "") {
+    const obj = {};
+
+    obj.id = uuidv4();
+    obj.displayName = currentUser.displayName;
+    obj.caption = text;
+    obj.photoURL = url;
+    obj.avatarURL = currentUser.photoURL;
+
+    return obj;
+  }
+
   return (
-    <Container maxWidth="sm" style={{ position: "relative" }}>
-      {loading && (
-        <div className={classes.loadingScreen}>
-          <CircularProgress />
-        </div>
-      )}
+    <Container maxWidth="sm">
       <Paper className={classes.paper}>
+        <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+          <Alert severity={error ? "error" : "success"} onClose={handleClose}>
+            {error ? error : "Post uploaded!"}
+          </Alert>
+        </Snackbar>
         <PostTextArea label="Create a post" text={text} setText={setText} />
         <ImgView image={image}>
           {image && (
@@ -82,25 +103,3 @@ export default function CreatePost() {
     </Container>
   );
 }
-
-const ImgView = styled.div`
-  width: 100%;
-  height: max-content;
-  margin: ${({ image }) => (image ? "8px 0" : "0")};
-  position: relative;
-
-  img {
-    height: 100px;
-    width: auto;
-    cursor: pointer;
-  }
-`;
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: max-content;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-top: 8px;
-`;
