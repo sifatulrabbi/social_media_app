@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Container, Divider, Paper, Typography } from "@material-ui/core";
 import styled from "styled-components";
 import { theme } from "../../Contexts";
-import FeedUserInfo from "./FeedUserInfo";
-import FeedImage from "./FeedImage";
-import FeedBottom from "./FeedBottom";
+import FeedUserInfo from "./UserInfo";
+import FeedImage from "./Image";
+import FeedBottom from "./Bottom";
 
 export default function FeedCard({ post }) {
   const [showComment, setShowComment] = useState(false);
@@ -27,7 +27,8 @@ export default function FeedCard({ post }) {
             showComment={showComment}
             theme={theme}
             setShowComment={setShowComment}
-            comments={["hello"]}
+            postId={post.id}
+            displayName={post.displayName}
           />
         </Paper>
       </Container>

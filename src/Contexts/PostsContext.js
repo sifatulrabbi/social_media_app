@@ -10,7 +10,7 @@ export function useGetPosts() {
 
 export function PostsProvider({ children }) {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState();
 
   async function getPosts() {
     const arrayOfPosts = [];

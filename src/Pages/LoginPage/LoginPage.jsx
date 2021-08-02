@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { LoginButton } from "../../Components";
 import { theme } from "../../Contexts";
 
-export default function TestPage() {
+export default function LoginPage() {
   return (
     <PageContainer>
       <Container maxWidth="sm" align="center">

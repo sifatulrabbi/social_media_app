@@ -7,7 +7,6 @@ import {
   AuthProvider,
   CommentsProvider,
   CustomThemeProvider,
-  LoadingProvider,
   PostsProvider,
   SetPostProvider,
 } from "./Contexts";
@@ -17,23 +16,21 @@ function App() {
     <Router>
       <CustomThemeProvider>
         <GlobalStyles />
-        <LoadingProvider>
-          <AuthProvider>
-            <PostsProvider>
-              <Switch>
-                <SetPostProvider>
-                  <CommentsProvider>
-                    <PrivateRoute exact path="/" component={HomePage} />
-                  </CommentsProvider>
-                </SetPostProvider>
-                <Route exact path="/login" component={LoginPage} />
-                <Route exact path="/sign-up" component={SignUpPage} />
-                <Route exact path="/reset-password" component={ForgotPassPage} />
-                <Route exact path="/dashboard" component={DashboardPage} />
-              </Switch>
-            </PostsProvider>
-          </AuthProvider>
-        </LoadingProvider>
+        <AuthProvider>
+          <PostsProvider>
+            <SetPostProvider>
+              <CommentsProvider>
+                <Switch>
+                  <PrivateRoute exact path="/" component={HomePage} />
+                  <Route exact path="/login" component={LoginPage} />
+                  <Route exact path="/sign-up" component={SignUpPage} />
+                  <Route exact path="/reset-password" component={ForgotPassPage} />
+                  <Route exact path="/dashboard" component={DashboardPage} />
+                </Switch>
+              </CommentsProvider>
+            </SetPostProvider>
+          </PostsProvider>
+        </AuthProvider>
       </CustomThemeProvider>
     </Router>
   );

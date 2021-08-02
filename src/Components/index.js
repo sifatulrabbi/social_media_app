@@ -6,3 +6,4 @@ export { default as PrivateRoute } from "./PrivateRoute/PrivateRoute";
 export { default as ForgotPassForm } from "./ForgotPassForm/ForgotPassForm";
 export { default as Dashboard } from "./Dashboard/Dashboard";
 export { default as FeedCard } from "./FeedCard";
+export { default as LoadingScreen } from "./LoadingScreen";

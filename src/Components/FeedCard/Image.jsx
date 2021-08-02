@@ -2,11 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export default function FeedImage({ imgURL }) {
-  return (
-    <Container>
-      <Img src={imgURL} />
-    </Container>
-  );
+  return <Container>{imgURL && <Img src={imgURL} />}</Container>;
 }
 
 const Container = styled.div`

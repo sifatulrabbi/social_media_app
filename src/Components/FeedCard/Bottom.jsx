@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Accordion, AccordionDetails, AccordionSummary } from "@material-ui/core";
-import FeedReactions from "./FeedReactions";
-import FeedComments from "./FeedComments";
+import FeedReactions from "./Reactions";
+import FeedComments from "./Comments";
 
-export default function FeedBottom({ showComment, setShowComment, theme, comments }) {
+export default function FeedBottom({
+  showComment,
+  setShowComment,
+  theme,
+  postId,
+  displayName,
+}) {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
@@ -20,7 +26,7 @@ export default function FeedBottom({ showComment, setShowComment, theme, comment
         />
       </AccordionSummary>
       <AccordionDetails>
-        <FeedComments comments={comments} />
+        <FeedComments postId={postId} displayName={displayName} />
       </AccordionDetails>
     </Accordion>
   );
