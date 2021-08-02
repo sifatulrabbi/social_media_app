@@ -4,7 +4,7 @@ import { Typography } from "@material-ui/core";
 import AddComment from "./AddComment";
 import { useComments } from "../../Contexts";
 
-export default function FeedComments({ postId, displayName }) {
+export default function FeedComments({ postId }) {
   const { comments } = useComments();
   const [thisComments, setThisComments] = useState([]);
 
@@ -39,7 +39,7 @@ export default function FeedComments({ postId, displayName }) {
           </Typography>
         </div>
       ))}
-      <AddComment postId={postId} displayName={displayName} filterWithId={filterWithId} />
+      <AddComment postId={postId} filterWithId={filterWithId} />
     </Container>
   );
 }

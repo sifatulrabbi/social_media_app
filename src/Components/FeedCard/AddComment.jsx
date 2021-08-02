@@ -3,10 +3,11 @@ import { Button, Divider, TextField } from "@material-ui/core";
 import styled from "styled-components";
 import { db } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
-import { useComments } from "../../Contexts";
+import { useAuth, useComments } from "../../Contexts";
 
-export default function AddComment({ displayName, postId, filterWithId }) {
+export default function AddComment({ postId }) {
   const { getComments } = useComments();
+  const { currentUser } = useAuth();
   const [text, setText] = useState("");
 
   async function handleSubmit(e) {
@@ -14,7 +15,7 @@ export default function AddComment({ displayName, postId, filterWithId }) {
     const comment = {
       commentId: uuidv4(),
       id: postId,
-      displayName: displayName,
+      displayName: currentUser.displayName,
       text: text,
     };
 
@@ -23,6 +24,7 @@ export default function AddComment({ displayName, postId, filterWithId }) {
       .doc(comment.commentId)
       .set(comment)
       .then(() => {
+        setText("");
         console.log("comment posted!");
       })
       .catch((error) => {
@@ -46,6 +48,7 @@ export default function AddComment({ displayName, postId, filterWithId }) {
           multiline
           fullWidth
           onChange={handleChange}
+          value={text}
         />
         <Button
           type="submit"
