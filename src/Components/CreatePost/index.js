@@ -80,7 +80,7 @@ export default function CreatePost() {
   }
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" style={{ padding: "0 8px" }}>
       <Paper className={classes.paper}>
         <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
           <Alert severity={error ? "error" : "success"} onClose={handleClose}>
