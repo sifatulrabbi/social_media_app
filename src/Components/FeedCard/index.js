@@ -12,7 +12,7 @@ export default function FeedCard({ post }) {
   return (
     <CardWrapper>
       <Container maxWidth="sm" style={{ padding: "0 8px" }}>
-        <Paper>
+        <Paper variant="outlined">
           <FeedUserInfo
             avatarURL={post.avatarURL}
             name={post.displayName}

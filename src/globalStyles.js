@@ -34,5 +34,3 @@ export const GlobalStyles = createGlobalStyle`
     color: inherit;
   }
 `;
-
-// margin: theme.spacing(1, 'auto'), // '8px auto'

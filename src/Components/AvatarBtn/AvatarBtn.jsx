@@ -1,8 +1,6 @@
 import React from "react";
-import { Avatar, Menu, MenuItem, IconButton, makeStyles } from "@material-ui/core";
+import { Avatar, IconButton, makeStyles } from "@material-ui/core";
 import { theme } from "../../Contexts";
-import { useAuth } from "../../Contexts/AuthContext";
-import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   btn: {
@@ -11,26 +9,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function AvatarBtn({ noMenu, avatarURL }) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+export default function AvatarBtn({ setShow, avatarURL }) {
   const classes = useStyles();
-  const { logout } = useAuth();
-  const history = useHistory();
 
   function handleClick(e) {
-    !noMenu && setAnchorEl(e.currentTarget);
-  }
-
-  function onProfileClick() {
-    setAnchorEl(null);
-    history.push("/dashboard");
-  }
-
-  async function handleLogout() {
-    setAnchorEl(null);
-
-    await logout();
-    history.push("/login");
+    setShow(true);
   }
 
   return (
@@ -46,18 +29,6 @@ export default function AvatarBtn({ noMenu, avatarURL }) {
           style={{ pointerEvents: "none", height: "35px", width: "35px" }}
         />
       </IconButton>
-      {!noMenu && (
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={() => setAnchorEl(null)}
-        >
-          <MenuItem onClick={onProfileClick}>Profile</MenuItem>
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        </Menu>
-      )}
     </div>
   );
 }

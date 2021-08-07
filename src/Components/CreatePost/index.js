@@ -81,7 +81,7 @@ export default function CreatePost() {
 
   return (
     <Container maxWidth="sm" style={{ padding: "0 8px" }}>
-      <Paper className={classes.paper}>
+      <Paper variant="outlined" className={classes.paper}>
         <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
           <Alert severity={error ? "error" : "success"} onClose={handleClose}>
             {error ? error : "Post uploaded!"}
@@ -90,12 +90,21 @@ export default function CreatePost() {
         <PostTextArea label="Create a post" text={text} setText={setText} />
         <ImgView image={image}>
           {image && (
-            <img src={URL.createObjectURL(image)} alt="adding" onClick={removeImg} />
+            <img
+              src={URL.createObjectURL(image)}
+              alt="adding"
+              onClick={removeImg}
+            />
           )}
         </ImgView>
         <Wrapper>
           <PostImageForm image={image} setImage={setImage} />
-          <Button variant="text" color="primary" disableElevation onClick={onPost}>
+          <Button
+            variant="text"
+            color="primary"
+            disableElevation
+            onClick={onPost}
+          >
             Post
           </Button>
         </Wrapper>

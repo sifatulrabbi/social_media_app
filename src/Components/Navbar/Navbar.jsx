@@ -1,35 +1,30 @@
-import React from "react";
-import { AppBar, Typography, makeStyles } from "@material-ui/core";
+import React, { useState } from "react";
+import { AppBar, Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import AvatarBtn from "../AvatarBtn/AvatarBtn";
-import { theme, useAuth } from "../../Contexts";
-
-export const useStyles = makeStyles({
-  navbar: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    height: "50px",
-    padding: "0 1rem",
-    boxShadow: theme.shadows[2],
-  },
-
-  name: {
-    fontWeight: 500,
-    color: theme.palette.primary.main,
-  },
-});
+import { useAuth } from "../../Contexts";
+import AppDrawer from "../AppDrawer/AppDrawer";
+import useStyles from "./Navbar.styles";
 
 export default function Navbar() {
   const classes = useStyles();
   const { currentUser } = useAuth();
+  const [show, setShow] = useState(false);
 
   return (
-    <AppBar align="start" color="inherit" position="fixed" className={classes.navbar}>
-      <Typography variant="h5" component="h1" className={classes.name}>
-        SOCIALIZE
-      </Typography>
-      <AvatarBtn avatarURL={currentUser.photoURL} />
+    <AppBar
+      align="start"
+      color="inherit"
+      position="fixed"
+      className={classes.navbar}
+    >
+      <Link to="/">
+        <Typography variant="h5" component="h1" className={classes.name}>
+          SOCIALIZE
+        </Typography>
+      </Link>
+      <AvatarBtn avatarURL={currentUser.photoURL} setShow={setShow} />
+      <AppDrawer show={show} setShow={setShow} />
     </AppBar>
   );
 }
